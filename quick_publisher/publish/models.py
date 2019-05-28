@@ -9,6 +9,7 @@ class Post(models.Model):
     title = models.CharField('Title', max_length=200)
     content = models.TextField('Content')
     slug = models.SlugField('Slug')
+    view_count = models.IntegerField("View Count", default=0)
 
     def __str__(self):
         return '"%s" by %s' % (self.title, self.author)
