@@ -3,6 +3,8 @@ import logging
 from django.urls import reverse
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model
+from django.conf import settings
+
 from quick_publisher.celery import app
 
 
@@ -15,7 +17,7 @@ def send_verification_email(user_id):
             'Verify your QuickPublisher account',
             'Follow this link to verify your account: '
             'http://localhost:8000%s' % reverse('verify', kwargs={'uuid': str(user.verification_uuid)}),
-            'from@quickpublisher.dev',
+            settings.DEFAULT_FROM_EMAIL,
             [user.email],
             fail_silently=False,
         )
